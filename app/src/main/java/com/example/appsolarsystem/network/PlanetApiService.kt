@@ -8,7 +8,8 @@ import retrofit2.Retrofit
 import retrofit2.http.GET
 
 private const val BASE_URL =
-    "http://10.0.2.2:3000/"
+    //"http://192.168.100.101:3000/"
+    "http://192.168.54.15:3000"
 
 private val json = Json {
     ignoreUnknownKeys = true

@@ -24,23 +24,33 @@ sealed interface MoonUiState {
 
 class MoonViewModel : ViewModel(){
 
-    private var moonUiState: MoonUiState by mutableStateOf(MoonUiState.Loading)
+    var moonUiState: MoonUiState by mutableStateOf(MoonUiState.Loading)
     private val _moons = MutableStateFlow<List<Moon>>(emptyList())
-    val planets: StateFlow<List<Moon>> get() = _moons
+    val moons: StateFlow<List<Moon>> get() = _moons
 
     private fun setMoons(newMoons : List<Moon>){
         _moons.value = newMoons
     }
 
-    init{
-        getMoons()
-    }
 
     private fun getMoons(){
         viewModelScope.launch {
             moonUiState = MoonUiState.Loading
             moonUiState = try{
                 val listResult = MoonApi.retrofitService.getMoons()
+                setMoons(listResult)
+                MoonUiState.Success(listResult)
+            } catch (e: IOException) {
+                MoonUiState.Error
+            }
+        }
+    }
+
+    fun getMoonsByPlanetId(planetId: Int){
+        viewModelScope.launch {
+            moonUiState = MoonUiState.Loading
+            moonUiState = try {
+                val listResult = MoonApi.retrofitService.getMoonsByPlanetId(planetId)
                 setMoons(listResult)
                 MoonUiState.Success(listResult)
             } catch (e: IOException) {

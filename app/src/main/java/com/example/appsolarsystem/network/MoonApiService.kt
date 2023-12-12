@@ -6,10 +6,11 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 private const val BASE_URL =
-    "http://localhost:3000/"
-
+    //"http://192.168.100.101:3000/"
+    "http://192.168.54.15:3000"
 
 private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
@@ -17,8 +18,11 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface MoonApiService {
-    @GET("moons")
+    @GET("moon")
     suspend fun getMoons(): List<Moon>
+
+    @GET("moons/{planetId}")
+    suspend fun getMoonsByPlanetId(@Path("planetId") planetId: Int): List<Moon>
 }
 
 object MoonApi {
