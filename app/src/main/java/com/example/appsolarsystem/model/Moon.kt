@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Moon(
-    @SerialName("MoonID") val moonId: Int,
-    @SerialName("PlanetID") val planetId: Int,
+    @SerialName("MoonID") val moonID: Int,
+    @SerialName("PlanetID") val planetID : Int,
     @SerialName("Name") val name: String,
     @SerialName("ImageUrl") val imageUrl: String,
     @SerialName("Description") val description: String,

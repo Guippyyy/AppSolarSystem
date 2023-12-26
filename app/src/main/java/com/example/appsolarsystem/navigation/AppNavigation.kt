@@ -18,7 +18,7 @@ import com.example.appsolarsystem.ui.views.PlanetViewModel
 @Composable
 fun AppNavigation() {
     val navController: NavHostController = rememberNavController()
-    val planetViewModel: PlanetViewModel = viewModel()
+    //val planetViewModel: PlanetViewModel = viewModel()
 
     Scaffold(
         // Other scaffold parameters...
@@ -33,7 +33,7 @@ fun AppNavigation() {
                 SolarSystemScreen(
                     onNextButtonClicked = { planet ->
                         navController.navigate(
-                            "${Screens.PlanetIdScreen.name}/${Uri.encode(planet.planetId.toString())}/${Uri.encode(planet.name)}/${
+                            "${Screens.PlanetIdScreen.name}/${Uri.encode(planet.planetID.toString())}/${Uri.encode(planet.name)}/${
                                 Uri.encode(
                                     planet.imageUrl
                                 )

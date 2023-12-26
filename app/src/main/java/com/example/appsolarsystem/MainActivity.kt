@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.appsolarsystem.navigation.AppNavigation
+import com.example.appsolarsystem.ui.SolarSystemApp
 import com.example.appsolarsystem.ui.screens.SolarSystemScreen
 import com.example.appsolarsystem.ui.theme.AppSolarSystemTheme
 
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.surface
                 ) {
-                    AppNavigation()
+                    SolarSystemApp()
                     //SolarSystemScreen()
                 }
             }

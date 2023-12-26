@@ -31,7 +31,7 @@ import com.example.appsolarsystem.ui.views.PlanetViewModel
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun SolarSystemScreen(planetViewModel: PlanetViewModel = viewModel(),  onNextButtonClicked: (Planet) -> Unit) {
+fun SolarSystemScreen(planetViewModel: PlanetViewModel = viewModel(factory = PlanetViewModel.Factory),  onNextButtonClicked: (Planet) -> Unit) {
     val planets by planetViewModel.planets.collectAsState()
 
     LazyColumn(

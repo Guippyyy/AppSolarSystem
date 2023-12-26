@@ -7,26 +7,10 @@ import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.http.GET
 
-private const val BASE_URL =
-    //"http://192.168.100.101:3000/"
-    "http://192.168.54.15:3000"
 
-private val json = Json {
-    ignoreUnknownKeys = true
-}
-
-private val retrofit = Retrofit.Builder()
-    .baseUrl(BASE_URL)
-    .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
-    .build()
 
 interface PlanetApiService {
     @GET("planet")
     suspend fun getPlanets(): List<Planet>
 }
 
-object PlanetApi {
-    val retrofitService: PlanetApiService by lazy {
-        retrofit.create(PlanetApiService::class.java)
-    }
-}
