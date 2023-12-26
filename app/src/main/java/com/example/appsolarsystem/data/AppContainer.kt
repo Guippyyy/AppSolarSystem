@@ -14,16 +14,16 @@ import retrofit2.Retrofit
 
 interface AppContainer {
     val planetRepository : PlanetRepository
-    val moonRespository : MoonRepository
+    val moonRepository : MoonRepository
 }
 
 class DefaultAppContainer(private val context : Context) : AppContainer{
-    private val baseUrl = "http://192.168.100.101:3000"
+    private val baseUrl = "http://192.168.100.101:3000/"
 
 
     private val retrofit : Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
-        .addConverterFactory(Json.asConverterFactory("application.json".toMediaType()))
+        .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
         .build()
 
 
@@ -33,7 +33,7 @@ class DefaultAppContainer(private val context : Context) : AppContainer{
             retrofit.create(PlanetApiService::class.java)
         )
     }
-    override val moonRespository: MoonRepository by lazy {
+    override val moonRepository: MoonRepository by lazy {
         OfflineFirstMoonRepository(
             SolarSystemDatabase.getDatabase(context).moonDAO(),
             retrofit.create(MoonApiService::class.java)

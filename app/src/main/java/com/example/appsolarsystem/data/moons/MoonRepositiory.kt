@@ -8,6 +8,8 @@ interface MoonRepository {
 
     fun getAllMoonsStream() : Flow<List<Moon>>
 
+    fun getAllMoonsByPlanetStream(id : Int) : Flow<List<Moon?>>
+
     fun getMoonStream(id : Int ) : Flow<Moon?>
 
     suspend fun refreshMoons()

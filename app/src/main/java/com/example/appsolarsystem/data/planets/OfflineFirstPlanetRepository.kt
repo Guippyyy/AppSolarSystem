@@ -20,7 +20,7 @@ class OfflineFirstPlanetRepository(private val planetDAO: PlanetDAO, private val
     private suspend fun updatePlanetsInBackground() {
         while (true) {
             refreshPlanets()
-            delay(300000)
+            delay(3000)
         }
 
     }
@@ -39,6 +39,12 @@ class OfflineFirstPlanetRepository(private val planetDAO: PlanetDAO, private val
     }
 
     override suspend fun refreshPlanets() {
-        TODO("Not yet implemented")
+        planetApi.getPlanets()
+            .also {
+                externalPlanets -> planetDAO.deleteAndInsert(
+                    planets = externalPlanets.map(Planet::asPlanetDatabase)
+                )
+            }
     }
+
 }

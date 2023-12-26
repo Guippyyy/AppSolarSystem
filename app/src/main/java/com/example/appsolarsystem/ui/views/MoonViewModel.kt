@@ -11,6 +11,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil.network.HttpException
 import com.example.appsolarsystem.MyApplication
+import com.example.appsolarsystem.data.GlobalPlanet
 import com.example.appsolarsystem.data.moons.MoonRepository
 import com.example.appsolarsystem.model.Moon
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,21 +33,25 @@ class MoonViewModel(private val moonRepository: MoonRepository) : ViewModel() {
     val moons: StateFlow<List<Moon>> get() = _moons
 
     init {
-        getPlanets()
+        getMoons()
     }
 
-    private fun getPlanets() {
+    private fun getMoons() {
         viewModelScope.launch {
             moonUiState = MoonUiState.Loading
             moonUiState = try {
-                val moonsFlow = moonRepository.getAllMoonsStream()
-
-                val moons: MutableList<Moon> = mutableListOf()
-                moonsFlow.collect { pa ->
-                    moons.addAll(pa)
+                val moonsFlow = GlobalPlanet.planet?.let {
+                    moonRepository.getAllMoonsByPlanetStream(
+                        it.planetID)
                 }
 
-                _moons.value = moons
+                val moons: MutableList<Moon> = mutableListOf()
+                if (moonsFlow != null) {
+                    moonsFlow.collect { pa ->
+                        _moons.value = pa as List<Moon>
+                    }
+                }
+
                 MoonUiState.Success(moons)
             } catch (e: IOException) {
                 Log.d("PatientViewModel", "IOException")
@@ -72,7 +77,7 @@ class MoonViewModel(private val moonRepository: MoonRepository) : ViewModel() {
         viewModelScope.launch {
             try{
 
-                moonRepository.getMoonStream(id)
+                moonRepository.getAllMoonsByPlanetStream(id)
 
             } catch ( e : Exception){
                 Log.d("TimeSlotViewModel", "Exception")
@@ -90,8 +95,8 @@ class MoonViewModel(private val moonRepository: MoonRepository) : ViewModel() {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val application = (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as MyApplication)
-                val planetRepository = application.container.planetRepository
-                PlanetViewModel(planetRepository = planetRepository)
+                val moonRepository = application.container.moonRepository
+                MoonViewModel(moonRepository = moonRepository)
             }
         }
     }

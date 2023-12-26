@@ -43,14 +43,14 @@ fun AppNavigation() {
                 )
             }
 
-            composable(route = "${Screens.PlanetIdScreen.name}/{planetId}/{planetName}/{planetImage}/{planetDiameter}/{planetMass}/{planetGravity}") { backStackEntry ->
+            composable(route = "${Screens.PlanetIdScreen.name}/{planetID}/{planetName}/{planetImage}/{planetDiameter}/{planetMass}/{planetGravity}") { backStackEntry ->
                 val planetName = backStackEntry.arguments?.getString("planetName") ?: ""
                 val planetImage = backStackEntry.arguments?.getString("planetImage") ?: ""
-                val planetId = backStackEntry.arguments?.getString("planetId") ?: ""
+                val planetID = backStackEntry.arguments?.getString("planetID") ?: ""
                 val planetDiameter = backStackEntry.arguments?.getString("planetDiameter") ?: ""
                 val planetMass = backStackEntry.arguments?.getString("planetMass") ?: ""
                 val planetGravity = backStackEntry.arguments?.getString("planetGravity") ?: ""
-                PlanetIdScreen(planetId,planetName, planetImage, planetDiameter, planetMass, planetGravity) {
+                PlanetIdScreen(planetID,planetName, planetImage, planetDiameter, planetMass, planetGravity) {
 
                 }
             }

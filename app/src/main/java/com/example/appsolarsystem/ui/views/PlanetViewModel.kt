@@ -11,6 +11,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import coil.network.HttpException
 import com.example.appsolarsystem.MyApplication
+import com.example.appsolarsystem.data.GlobalPlanet
 import com.example.appsolarsystem.data.planets.PlanetRepository
 import com.example.appsolarsystem.model.Planet
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,9 +42,12 @@ class PlanetViewModel(private val planetRepository: PlanetRepository) : ViewMode
             planetUiState = try {
                 val planetsFlow = planetRepository.getAllPlanetsStream()
 
+                Log.d("here", "${planetsFlow}")
                 val planets: MutableList<Planet> = mutableListOf()
                 planetsFlow.collect { pa ->
-                    planets.addAll(pa)
+
+                    _planets.value = pa
+
                 }
 
                 _planets.value = planets
@@ -67,6 +71,9 @@ class PlanetViewModel(private val planetRepository: PlanetRepository) : ViewMode
         }
     }
 
+    fun selectPlanet(planet : Planet){
+        GlobalPlanet.planet = planet
+    }
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {

@@ -1,5 +1,6 @@
 package com.example.appsolarsystem.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -46,6 +47,7 @@ fun SolarSystemScreen(planetViewModel: PlanetViewModel = viewModel(factory = Pla
         itemsIndexed(planets) {index,  planet ->
             PlanetCard(planet, index){
                 onNextButtonClicked(planet)
+                planetViewModel.selectPlanet(planet)
             }
             Spacer(modifier = Modifier.height(156.dp))
         }

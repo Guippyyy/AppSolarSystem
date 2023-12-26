@@ -22,7 +22,7 @@ class OfflineFirstMoonRepository(private val moonDAO: MoonDAO, private val moonA
     private suspend fun updateMoonsInBackground() {
         while (true) {
             refreshMoons()
-            delay(300000)
+            delay(3000)
         }
 
     }
@@ -39,7 +39,22 @@ class OfflineFirstMoonRepository(private val moonDAO: MoonDAO, private val moonA
         return moonDAO.getMoon(id).map { moon -> moon?.asDomainMoon() }
     }
 
-    override suspend fun refreshMoons() {
-        TODO("Not yet implemented")
+    override fun getAllMoonsByPlanetStream(id : Int): Flow<List<Moon?>> {
+        return moonDAO.getMoonsByPlanet(id).map {moon -> moon.map{ it.asDomainMoon()}}
     }
+
+
+
+    override suspend fun refreshMoons() {
+        moonApi.getMoons()
+            .also {
+                    externalMoons -> moonDAO.deleteAndInsert(
+                moons = externalMoons.map(Moon::asMoonDatabase)
+            )
+
+            }
+    }
+
+
+
 }

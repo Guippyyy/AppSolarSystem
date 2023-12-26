@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.appsolarsystem.model.Planet
+import com.example.appsolarsystem.ui.views.PlanetViewModel
+
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun PlanetCard(planet: Planet, index: Int, onNextButtonClicked: (Planet) -> Unit) {
@@ -32,6 +34,7 @@ fun PlanetCard(planet: Planet, index: Int, onNextButtonClicked: (Planet) -> Unit
             .background(MaterialTheme.colorScheme.background)
             .clickable {
                 onNextButtonClicked(planet)
+
             },
     ) {
         Spacer(

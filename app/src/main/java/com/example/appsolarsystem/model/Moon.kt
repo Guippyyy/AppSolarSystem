@@ -10,7 +10,7 @@ data class Moon(
     @SerialName("Name") val name: String,
     @SerialName("ImageUrl") val imageUrl: String,
     @SerialName("Description") val description: String,
-    @SerialName("Diameter") val diameter : Int,
+    @SerialName("Diameter") val diameter : Double,
     @SerialName("Mass") val mass : Double,
 
 )

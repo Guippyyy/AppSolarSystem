@@ -39,17 +39,20 @@ import com.example.appsolarsystem.ui.views.PlanetViewModel
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun PlanetIdScreen(planetId: String, planetName: String, planetImage: String, planetDiameter: String, planetMass: String, planetGravity: String, onNextButtonClicked: () -> Unit){
+fun PlanetIdScreen(planetID: String, planetName: String, planetImage: String, planetDiameter: String, planetMass: String, planetGravity: String, onNextButtonClicked: () -> Unit){
 
-    val moonViewModel: MoonViewModel = viewModel()
+    val moonViewModel: MoonViewModel = viewModel(factory = MoonViewModel.Factory )
+
 
     // Use LaunchedEffect to trigger fetching moons when the planetId changes
-    LaunchedEffect(planetId) {
-        moonViewModel.getMoonsByPlanetId(planetId.toInt())
+    LaunchedEffect(planetID) {
+        moonViewModel.getMoonsByPlanetId(3)
     }
 
     // Collect moons as a state
     val moons by  moonViewModel.moons.collectAsState()
+
+    Log.d("moon", "$moons")
 
 
     LazyColumn(

@@ -8,7 +8,7 @@ import com.example.appsolarsystem.data.moons.MoonDatabase
 import com.example.appsolarsystem.data.planets.PlanetDAO
 import com.example.appsolarsystem.data.planets.PlanetDatabase
 import com.example.appsolarsystem.data.moons.MoonDAO
-@Database(entities = [PlanetDatabase::class, MoonDatabase::class], version = 1, exportSchema = false)
+@Database(entities = [PlanetDatabase::class, MoonDatabase::class], version = 2, exportSchema = false)
 abstract class SolarSystemDatabase : RoomDatabase() {
 
     abstract fun planetDAO(): PlanetDAO

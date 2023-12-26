@@ -13,7 +13,7 @@ data class MoonDatabase(
     val name: String,
     val imageUrl: String,
     val description: String,
-    val diameter: Int,
+    val diameter: Double,
     val mass: Double,
 )
 
