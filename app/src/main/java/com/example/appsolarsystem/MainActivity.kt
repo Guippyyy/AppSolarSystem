@@ -28,7 +28,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.surface
                 ) {
                     SolarSystemApp()
-                    //SolarSystemScreen()
                 }
             }
         }

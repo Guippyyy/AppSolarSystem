@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">AppSolarSystem</string>
+    <string name="drawerTitle">Explore the Solar System</string>
+    <string name="drawerAsteroids">Asteroids</string>
+    <string name="drawerComets">Comets</string>
+    <string name="drawerConstellations">Constellations</string>
+    <string name="drawerTheAsteroidBelt">The Asteroid Belt</string>
+    <string name="drawerGalaxies">Galaxies</string>
+    <string name="drawerStars">Stars</string>
+    <string name="formation">Formation</string>
+    <string name="distance">Distance, Size and Mass</string>
+    <string name="orbit">Orbit and Rotation</string>
 </resources>

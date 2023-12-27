@@ -5,8 +5,15 @@ import com.example.appsolarsystem.data.moons.MoonRepository
 import com.example.appsolarsystem.data.moons.OfflineFirstMoonRepository
 import com.example.appsolarsystem.data.planets.OfflineFirstPlanetRepository
 import com.example.appsolarsystem.data.planets.PlanetRepository
+import com.example.appsolarsystem.data.planets.planetInfo.OfflineFirstPlanetInfoRepository
+import com.example.appsolarsystem.data.planets.planetInfo.PlanetInfoRepository
+import com.example.appsolarsystem.data.quickFacts.OfflineFirstQuickFactRepository
+import com.example.appsolarsystem.data.quickFacts.QuickFactRepository
 import com.example.appsolarsystem.network.MoonApiService
 import com.example.appsolarsystem.network.PlanetApiService
+import com.example.appsolarsystem.network.PlanetInfoApiService
+import com.example.appsolarsystem.network.QuickFactApiService
+import com.example.appsolarsystem.ui.views.QuickFactViewModel
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -15,6 +22,8 @@ import retrofit2.Retrofit
 interface AppContainer {
     val planetRepository : PlanetRepository
     val moonRepository : MoonRepository
+    val planetInfoRepository : PlanetInfoRepository
+    val quickFactRepository : QuickFactRepository
 }
 
 class DefaultAppContainer(private val context : Context) : AppContainer{
@@ -39,6 +48,21 @@ class DefaultAppContainer(private val context : Context) : AppContainer{
             retrofit.create(MoonApiService::class.java)
         )
     }
+
+    override val planetInfoRepository : PlanetInfoRepository by lazy {
+        OfflineFirstPlanetInfoRepository(
+            SolarSystemDatabase.getDatabase(context).planetInfoDAO(),
+            retrofit.create(PlanetInfoApiService::class.java)
+        )
+    }
+
+    override val quickFactRepository: QuickFactRepository by lazy {
+        OfflineFirstQuickFactRepository(
+            SolarSystemDatabase.getDatabase(context).quickFactDAO(),
+            retrofit.create(QuickFactApiService::class.java)
+        )
+    }
+
 }
 
 
