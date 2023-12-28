@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -56,6 +57,7 @@ fun PlanetCard(planet: Planet, index: Int, onNextButtonClicked: (Planet) -> Unit
                 ) {
                     Text(
                         text = planet.name,
+                        modifier = Modifier.testTag(planet.name),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onBackground
@@ -64,6 +66,7 @@ fun PlanetCard(planet: Planet, index: Int, onNextButtonClicked: (Planet) -> Unit
 
                     Text(
                         text = planet.description,
+                        Modifier.testTag(planet.description),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onBackground
                     )

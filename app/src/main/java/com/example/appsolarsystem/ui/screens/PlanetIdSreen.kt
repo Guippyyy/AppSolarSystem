@@ -48,6 +48,8 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.example.appsolarsystem.R
 import com.example.appsolarsystem.component.MoonCard
 import com.example.appsolarsystem.component.PlanetCard
+import com.example.appsolarsystem.component.QuickFactBottomSheet
+import com.example.appsolarsystem.data.GlobalPlanet
 import com.example.appsolarsystem.model.Moon
 import com.example.appsolarsystem.ui.views.MoonUiState
 import com.example.appsolarsystem.ui.views.MoonViewModel
@@ -59,9 +61,8 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalGlideComposeApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun PlanetIdScreen(planetID: String, planetName: String, planetImage: String, planetDiameter: String, planetMass: String, planetGravity: String, onNextButtonClicked: () -> Unit) {
+fun PlanetIdScreen(moonViewModel: MoonViewModel = viewModel(factory = MoonViewModel.Factory)) {
 
-    val moonViewModel: MoonViewModel = viewModel(factory = MoonViewModel.Factory)
     val planetInfoViewModel: PlanetInfoViewModel = viewModel(factory = PlanetInfoViewModel.Factory)
     val quickFactViewModel: QuickFactViewModel = viewModel(factory = QuickFactViewModel.Factory)
     val sheetState = rememberModalBottomSheetState()
@@ -95,89 +96,7 @@ fun PlanetIdScreen(planetID: String, planetName: String, planetImage: String, pl
                     if (quickFact.isNotEmpty()) {
 
                         items(quickFact) { qf ->
-
-                            Text(
-                                text = "Recorded By: " + qf.recordedBy,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-
-                            Text(
-                                text = "First Recorded: " + qf.firstRecorded,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-
-                            Text(
-                                text = "Surface tempurature: " + qf.surfaceTempurature,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-
-                            Text(
-                                text = "Orbit Period: " + qf.orbitPeriod,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-
-                            Text(
-                                text = "Orbit Distance: " + qf.orbitDistance,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-
-                            Text(
-                                text = "Known Rings: " + qf.knownRings,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-
-                            Text(
-                                text = "Notable Moons: " + qf.notableMoons,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-
-                            Text(
-                                text = "Known Moons: " + qf.knownMoons,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-
-                            Text(
-                                text = "Equatorial Circumference: " + qf.equatorialCircumference,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-
-                            Text(
-                                text = "Polar Diameter: " + qf.polarDiameter,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-                            Text(
-                                text = "Equatorial Diameter: " + qf.equatorialDiameter,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-                            Text(
-                                text = "Mass: " + qf.mass,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-                            Spacer(modifier = Modifier.height(100.dp))
+                            QuickFactBottomSheet(qf)
                         }
 
                     }
@@ -197,13 +116,13 @@ fun PlanetIdScreen(planetID: String, planetName: String, planetImage: String, pl
             item {
 
                 Text(
-                    text = planetName,
+                    text = GlobalPlanet.planet!!.name,
                     fontSize = 54.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary
                 )
                 GlideImage(
-                    model = planetImage,
+                    model = GlobalPlanet.planet!!.imageUrl,
                     contentDescription = null,
                     contentScale = ContentScale.Crop
                 )

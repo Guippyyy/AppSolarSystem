@@ -27,8 +27,8 @@ sealed interface PlanetUiState {
 
 
 class PlanetViewModel(private val planetRepository: PlanetRepository) : ViewModel() {
-    private var planetUiState: PlanetUiState by mutableStateOf(PlanetUiState.Loading)
-
+    var planetUiState: PlanetUiState by mutableStateOf(PlanetUiState.Loading)
+    private set
     private val _planets = MutableStateFlow<List<Planet>>(emptyList())
     val planets: StateFlow<List<Planet>> get() = _planets
 
@@ -43,15 +43,15 @@ class PlanetViewModel(private val planetRepository: PlanetRepository) : ViewMode
                 val planetsFlow = planetRepository.getAllPlanetsStream()
 
                 Log.d("here", "${planetsFlow}")
-                val planets: MutableList<Planet> = mutableListOf()
                 planetsFlow.collect { pa ->
 
                     _planets.value = pa
 
                 }
 
-                _planets.value = planets
-                PlanetUiState.Success(planets)
+                Log.d("hello", "im here")
+
+                PlanetUiState.Success(planets = planets.value)
             } catch (e: IOException) {
                 Log.d("PatientViewModel", "IOException")
                 Log.d("PatientViewModel", e.message.toString())
