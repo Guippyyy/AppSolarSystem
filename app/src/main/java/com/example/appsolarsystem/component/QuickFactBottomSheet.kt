@@ -26,7 +26,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.appsolarsystem.model.QuickFact
 import com.microsoft.sqlserver.jdbc.SQLServerDataTable
-
+/**
+ * QuickFactBottomSheet is a composable function that displays information about a quick fact in a bottom sheet.
+ *
+ * @param qf The [QuickFact] object containing information about the quick fact.
+ */
 @Composable
 fun QuickFactBottomSheet(qf: QuickFact) {
 
@@ -107,7 +111,12 @@ fun QuickFactBottomSheet(qf: QuickFact) {
     Spacer(Modifier.height(50.dp))
 }
 
-
+/**
+ * RowWithLabel is a composable function that displays a row with a label and a corresponding value.
+ *
+ * @param label The label for the information.
+ * @param value The value of the information.
+ */
 @Composable
 fun RowWithLabel(label: String, value: String) {
     Row(
@@ -131,7 +140,13 @@ fun RowWithLabel(label: String, value: String) {
         ShowText(value, fontSize = 16.sp, fontWeight = FontWeight.Normal)
     }
 }
-
+/**
+ * ShowText is a composable function that displays text with a specified font size and font weight.
+ *
+ * @param text The text to be displayed.
+ * @param fontSize The font size of the text.
+ * @param fontWeight The font weight of the text.
+ */
 @Composable
 fun ShowText(text: String, fontSize: TextUnit, fontWeight: FontWeight) {
     Text(

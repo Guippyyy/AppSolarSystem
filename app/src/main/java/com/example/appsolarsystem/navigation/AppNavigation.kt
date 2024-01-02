@@ -18,12 +18,14 @@ import com.example.appsolarsystem.ui.screens.SolarSystemScreen
 import com.example.appsolarsystem.ui.views.MoonViewModel
 import com.example.appsolarsystem.ui.views.PlanetViewModel
 
-
+/**
+ * Composable function representing the main navigation flow of the Solar System app.
+ */
 @Composable
 fun AppNavigation() {
     val navController: NavHostController = rememberNavController()
-   // val planetViewModel: PlanetViewModel = viewModel()
-    val moonViewModel : MoonViewModel = viewModel()
+    val planetViewModel: PlanetViewModel = viewModel(factory = PlanetViewModel.Factory)
+    val moonViewModel : MoonViewModel = viewModel(factory = MoonViewModel.Factory)
 
     Scaffold(
         // Other scaffold parameters...
@@ -44,7 +46,7 @@ fun AppNavigation() {
                 }
                 ) {
                 SolarSystemScreen(
-                   // planetViewModel = planetViewModel,
+                    planetViewModel = planetViewModel,
                     onNextButtonClicked = { planet ->
                         navController.navigate(
                             Screens.PlanetIdScreen.name

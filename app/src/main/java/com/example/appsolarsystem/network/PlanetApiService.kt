@@ -9,8 +9,16 @@ import retrofit2.http.GET
 
 
 
+/**
+ * Retrofit service interface for interacting with the Planet API.
+ */
 interface PlanetApiService {
+
+    /**
+     * Retrieves a list of all planets.
+     *
+     * @return A list of [Planet] objects representing planets in the solar system.
+     */
     @GET("planet")
     suspend fun getPlanets(): List<Planet>
 }
-

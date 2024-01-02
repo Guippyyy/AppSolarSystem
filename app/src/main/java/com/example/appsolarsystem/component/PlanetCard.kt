@@ -25,10 +25,15 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.appsolarsystem.model.Planet
 import com.example.appsolarsystem.ui.views.PlanetViewModel
-
+/**
+ * PlanetCard is a composable function that displays information about a planet.
+ *
+ * @param planet The [Planet] object containing information about the planet.
+ * @param onNextButtonClicked A lambda function that will be invoked when the planet card is clicked.
+ */
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun PlanetCard(planet: Planet, index: Int, onNextButtonClicked: (Planet) -> Unit) {
+fun PlanetCard(planet: Planet, onNextButtonClicked: (Planet) -> Unit) {
     Box(
         modifier = Modifier
             .clip(MaterialTheme.shapes.extraLarge)
@@ -47,7 +52,7 @@ fun PlanetCard(planet: Planet, index: Int, onNextButtonClicked: (Planet) -> Unit
                 .fillMaxWidth()
                 .fillMaxHeight()
         ) {
-            if (index % 2 == 0) {
+            if (planet.planetID % 2 == 0) {
 
                 Column(
                     modifier = Modifier

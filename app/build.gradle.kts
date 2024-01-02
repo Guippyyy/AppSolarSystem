@@ -3,7 +3,9 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
     id("com.google.devtools.ksp")
+    id("org.jetbrains.dokka") version "1.9.10"
 }
+
 
 android {
     namespace = "com.example.appsolarsystem"
@@ -49,10 +51,13 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
 }
 
+
+
 dependencies {
-    implementation("androidx.fragment:fragment-ktx:1.6.2")
+   implementation("androidx.fragment:fragment-ktx:1.6.2")
     val nav_version = "2.7.6"
 
     // Java language implementation
@@ -129,4 +134,5 @@ dependencies {
     //implementation("com.github.bumptech.glide:glide:4.14.2")
     implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
     implementation("androidx.compose.foundation:foundation:1.5.4")
+    dokkaPlugin("org.jetbrains.dokka:android-documentation-plugin:1.9.10")
 }

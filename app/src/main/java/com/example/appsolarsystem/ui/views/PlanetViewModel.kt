@@ -19,38 +19,68 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.io.IOException
 
+/**
+ * Represents the possible UI states for Planet information.
+ */
 sealed interface PlanetUiState {
+
+    /**
+     * Represents a successful state with a list of planets.
+     *
+     * @property planets The list of planets.
+     */
     data class Success(val planets: List<Planet>) : PlanetUiState
+
+    /**
+     * Represents an error state with an error message.
+     *
+     * @property errorMessage The error message.
+     */
     data class Error(val errorMessage: String) : PlanetUiState
+
+    /**
+     * Represents the loading state.
+     */
     object Loading : PlanetUiState
 }
 
-
+/**
+ * ViewModel for managing Planet data in the application.
+ *
+ * @property planetRepository The repository for fetching Planet data.
+ */
 class PlanetViewModel(private val planetRepository: PlanetRepository) : ViewModel() {
+
+    /**
+     * Mutable state for holding the current Planet UI state.
+     */
     var planetUiState: PlanetUiState by mutableStateOf(PlanetUiState.Loading)
-    private set
+        private set
+
+    /**
+     * StateFlow for providing a reactive stream of Planet data.
+     */
     private val _planets = MutableStateFlow<List<Planet>>(emptyList())
     val planets: StateFlow<List<Planet>> get() = _planets
 
+    /**
+     * Initializes the PlanetViewModel by fetching the list of planets.
+     */
     init {
         getPlanets()
     }
 
+    /**
+     * Fetches the list of planets from the repository and updates the UI state accordingly.
+     */
     private fun getPlanets() {
         viewModelScope.launch {
             planetUiState = PlanetUiState.Loading
             planetUiState = try {
                 val planetsFlow = planetRepository.getAllPlanetsStream()
-
-                Log.d("here", "${planetsFlow}")
                 planetsFlow.collect { pa ->
-
                     _planets.value = pa
-
                 }
-
-                Log.d("hello", "im here")
-
                 PlanetUiState.Success(planets = planets.value)
             } catch (e: IOException) {
                 Log.d("PatientViewModel", "IOException")
@@ -71,17 +101,27 @@ class PlanetViewModel(private val planetRepository: PlanetRepository) : ViewMode
         }
     }
 
-    fun selectPlanet(planet : Planet){
+    /**
+     * Selects a specific planet to be used globally in the application.
+     *
+     * @param planet The selected planet.
+     */
+    fun selectPlanet(planet: Planet) {
         GlobalPlanet.planet = planet
     }
 
+    /**
+     * Companion object for providing a ViewModelProvider.Factory for PlanetViewModel.
+     */
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val application = (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as MyApplication)
+                val application =
+                    (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as MyApplication)
                 val planetRepository = application.container.planetRepository
                 PlanetViewModel(planetRepository = planetRepository)
             }
         }
     }
+
 }

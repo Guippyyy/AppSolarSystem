@@ -17,7 +17,10 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.appsolarsystem.R
 import com.example.appsolarsystem.navigation.AppNavigation
-
+/**
+ * Composable function representing the main Solar System app, which includes a Modal Navigation Drawer
+ * for navigation and the main content represented by [AppNavigation].
+ */
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class)
 @Composable
 fun SolarSystemApp(){

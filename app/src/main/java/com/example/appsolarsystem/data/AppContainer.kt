@@ -19,29 +19,56 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 
+/**
+ * Interface defining the dependencies for the Solar System application.
+ */
 interface AppContainer {
-    val planetRepository : PlanetRepository
-    val moonRepository : MoonRepository
-    val planetInfoRepository : PlanetInfoRepository
-    val quickFactRepository : QuickFactRepository
-}
+    /**
+     * Repository for handling planet-related data.
+     */
+    val planetRepository: PlanetRepository
 
-class DefaultAppContainer(private val context : Context) : AppContainer{
+    /**
+     * Repository for handling moon-related data.
+     */
+    val moonRepository: MoonRepository
+
+    /**
+     * Repository for handling planet information-related data.
+     */
+    val planetInfoRepository: PlanetInfoRepository
+
+    /**
+     * Repository for handling quick facts-related data.
+     */
+    val quickFactRepository: QuickFactRepository
+}
+/**
+ * Default implementation of [AppContainer] providing concrete instances of repositories.
+ *
+ * @property context The application context.
+ */
+class DefaultAppContainer(private val context: Context) : AppContainer {
     private val baseUrl = "http://192.168.100.101:3000/"
 
-
-    private val retrofit : Retrofit = Retrofit.Builder()
+    private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
         .build()
 
-
-    override val planetRepository : PlanetRepository by lazy {
+    /**
+     * Lazily initialized repository for handling planet-related data.
+     */
+    override val planetRepository: PlanetRepository by lazy {
         OfflineFirstPlanetRepository(
             SolarSystemDatabase.getDatabase(context).planetDAO(),
             retrofit.create(PlanetApiService::class.java)
         )
     }
+
+    /**
+     * Lazily initialized repository for handling moon-related data.
+     */
     override val moonRepository: MoonRepository by lazy {
         OfflineFirstMoonRepository(
             SolarSystemDatabase.getDatabase(context).moonDAO(),
@@ -49,20 +76,23 @@ class DefaultAppContainer(private val context : Context) : AppContainer{
         )
     }
 
-    override val planetInfoRepository : PlanetInfoRepository by lazy {
+    /**
+     * Lazily initialized repository for handling planet information-related data.
+     */
+    override val planetInfoRepository: PlanetInfoRepository by lazy {
         OfflineFirstPlanetInfoRepository(
             SolarSystemDatabase.getDatabase(context).planetInfoDAO(),
             retrofit.create(PlanetInfoApiService::class.java)
         )
     }
 
+    /**
+     * Lazily initialized repository for handling quick facts-related data.
+     */
     override val quickFactRepository: QuickFactRepository by lazy {
         OfflineFirstQuickFactRepository(
             SolarSystemDatabase.getDatabase(context).quickFactDAO(),
             retrofit.create(QuickFactApiService::class.java)
         )
     }
-
 }
-
-

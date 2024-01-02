@@ -20,14 +20,6 @@ class PlanetIdScreenTest {
 
     @Before
     fun setup(){
-
-    }
-
-    @Test
-    fun plantIdScreen_Moon_verify(){
-
-
-
         val planet1 = Planet(1, "planet1","fdsfde", "test", 3, 3.0, 33.0)
         val planetList = mutableListOf(planet1)
         val planetViewModel = PlanetViewModel(FakePlanetRepository(planetList))
@@ -43,16 +35,17 @@ class PlanetIdScreenTest {
                 moonViewModel = moonViewModel
             )
         }
+    }
 
-        composeTestRule.waitForIdle()
-
+    @Test
+    fun plantIdScreen_Moon_verify(){
         Thread.sleep(4000)
-
         composeTestRule.onNodeWithText("planet1").assertExists()
         composeTestRule.onNodeWithText("moon").assertExists()
-
-
     }
+
+
+
 
 
 }

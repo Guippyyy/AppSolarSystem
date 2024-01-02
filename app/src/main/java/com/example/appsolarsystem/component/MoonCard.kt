@@ -21,7 +21,11 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.appsolarsystem.model.Moon
-
+/**
+ * MoonCard is a composable function that displays information about a moon.
+ *
+ * @param moon The [Moon] object containing information about the moon.
+ */
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun MoonCard(moon: Moon) {
