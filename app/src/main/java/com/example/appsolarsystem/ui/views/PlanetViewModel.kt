@@ -49,7 +49,7 @@ sealed interface PlanetUiState {
  *
  * @property planetRepository The repository for fetching Planet data.
  */
-class PlanetViewModel(private val planetRepository: PlanetRepository) : ViewModel() {
+class PlanetViewModel( val planetRepository: PlanetRepository) : ViewModel() {
 
     /**
      * Mutable state for holding the current Planet UI state.
@@ -73,7 +73,7 @@ class PlanetViewModel(private val planetRepository: PlanetRepository) : ViewMode
     /**
      * Fetches the list of planets from the repository and updates the UI state accordingly.
      */
-    private fun getPlanets() {
+    fun getPlanets() {
         viewModelScope.launch {
             planetUiState = PlanetUiState.Loading
             planetUiState = try {
@@ -83,19 +83,19 @@ class PlanetViewModel(private val planetRepository: PlanetRepository) : ViewMode
                 }
                 PlanetUiState.Success(planets = planets.value)
             } catch (e: IOException) {
-                Log.d("PatientViewModel", "IOException")
-                Log.d("PatientViewModel", e.message.toString())
-                Log.d("PatientViewModel", e.stackTraceToString())
+//                Log.d("PatientViewModel", "IOException")
+//                Log.d("PatientViewModel", e.message.toString())
+//                Log.d("PatientViewModel", e.stackTraceToString())
                 PlanetUiState.Error("IOException error: ${e.message}")
             } catch (e: HttpException) {
-                Log.d("PatientViewModel", "HttpException")
-                Log.d("PatientViewModel", e.message.toString())
-                Log.d("PatientViewModel", e.stackTraceToString())
+//                Log.d("PatientViewModel", "HttpException")
+//                Log.d("PatientViewModel", e.message.toString())
+//                Log.d("PatientViewModel", e.stackTraceToString())
                 PlanetUiState.Error("HttpException error: ${e.message}")
             } catch (e: Exception) {
-                Log.d("PatientViewModel", "Exception")
-                Log.d("PatientViewModel", e.message.toString())
-                Log.d("PatientViewModel", e.stackTraceToString())
+//                Log.d("PatientViewModel", "Exception")
+//                Log.d("PatientViewModel", e.message.toString())
+//                Log.d("PatientViewModel", e.stackTraceToString())
                 PlanetUiState.Error("Exception error: ${e.message}")
             }
         }

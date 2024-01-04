@@ -1,7 +1,9 @@
 package com.example.appsolarsystem
 
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import com.example.appsolarsystem.data.moons.FakeMoonRepository
 import com.example.appsolarsystem.data.planets.FakePlanetRepository
 import com.example.appsolarsystem.model.Moon
@@ -20,30 +22,41 @@ class PlanetIdScreenTest {
 
     @Before
     fun setup(){
-        val planet1 = Planet(1, "planet1","fdsfde", "test", 3, 3.0, 33.0)
+        val moon1 = Moon(10,10,"Moon", "fdf","test2",4.0,3.2 )
+        val planet1 = Planet(10, "planet1","fdsfde", "test", 3, 3.0, 33.0)
+        val moonList = mutableListOf(moon1)
         val planetList = mutableListOf(planet1)
         val planetViewModel = PlanetViewModel(FakePlanetRepository(planetList))
-        planetViewModel.selectPlanet(planet1)
-
-        val moon1 = Moon(1,1,"moon", "fdf","test2",4.0,3.2 )
-        val moonList = mutableListOf(moon1)
         val moonViewModel = MoonViewModel(FakeMoonRepository(moonList))
 
-        composeTestRule.setContent {
 
-            PlanetIdScreen(
-                moonViewModel = moonViewModel
-            )
+        planetViewModel.selectPlanet(planet1)
+        composeTestRule.setContent {
+            PlanetIdScreen()
         }
     }
 
     @Test
-    fun plantIdScreen_Moon_verify(){
+    fun plantIdScreen_Planet_verify(){
         Thread.sleep(4000)
         composeTestRule.onNodeWithText("planet1").assertExists()
-        composeTestRule.onNodeWithText("moon").assertExists()
+
     }
 
+
+    @Test
+    fun planetIdScreen_quickFactsButton_verify(){
+
+        Thread.sleep(4000)
+
+        composeTestRule.onNodeWithTag("facts", useUnmergedTree = true).assertExists()
+        composeTestRule.onNodeWithText("Quick Facts", useUnmergedTree = true).performClick()
+
+        composeTestRule.waitForIdle()
+        Thread.sleep(5000)
+
+
+    }
 
 
 

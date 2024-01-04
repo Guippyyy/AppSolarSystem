@@ -1,7 +1,6 @@
 package com.example.appsolarsystem.ui.screens
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
@@ -24,12 +23,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -56,27 +55,25 @@ import com.example.appsolarsystem.ui.views.QuickFactViewModel
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalGlideComposeApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun PlanetIdScreen(moonViewModel: MoonViewModel = viewModel(factory = MoonViewModel.Factory)) {
+fun PlanetIdScreen() {
 
-    val planetInfoViewModel: PlanetInfoViewModel = viewModel(factory = PlanetInfoViewModel.Factory)
-    val quickFactViewModel: QuickFactViewModel = viewModel(factory = QuickFactViewModel.Factory)
     val sheetState = rememberModalBottomSheetState()
-    val scope = rememberCoroutineScope()
     var showBottomSheet by remember { mutableStateOf(false) }
 
-    val moons by moonViewModel.moons.collectAsState()
-    val planetInfos by planetInfoViewModel.planetInfos.collectAsState()
+    val quickFactViewModel: QuickFactViewModel = viewModel(factory = QuickFactViewModel.Factory)
     val quickFact by quickFactViewModel.quickFacts.collectAsState()
-    val moonviewModel: MoonViewModel = viewModel(factory = MoonViewModel.Factory)
 
-    val moon by moonviewModel.moons.collectAsState()
+    val planetInfoViewModel: PlanetInfoViewModel = viewModel(factory = PlanetInfoViewModel.Factory)
+    val planetInfos by planetInfoViewModel.planetInfos.collectAsState()
 
-    Log.d("moon", "${moons}")
+    val moonViewModel: MoonViewModel = viewModel(factory = MoonViewModel.Factory)
+    val moon by moonViewModel.moons.collectAsState()
+
 
     Scaffold(
         floatingActionButton = {
             ExtendedFloatingActionButton(
-                text = { Text("Quick Facts") },
+                text = { Text("Quick Facts", modifier = Modifier.testTag("facts")) },
                 icon = { Icon(Icons.Filled.Add, contentDescription = "") },
                 onClick = {
                     showBottomSheet = true
@@ -134,51 +131,55 @@ fun PlanetIdScreen(moonViewModel: MoonViewModel = viewModel(factory = MoonViewMo
                 }
             } else {
                 item {
-                    Text("no moon")
+
                     Spacer(modifier = Modifier.height(16.dp))
                 }
             }
 
-            if (planetInfos.isNotEmpty()) {
+            if (!planetInfos.isNullOrEmpty()) {
                 items(planetInfos) { planetInfo ->
 
 
-                    Text(text = planetInfo.intro, style = MaterialTheme.typography.headlineSmall)
+                    planetInfo.intro?.let { it1 -> Text(text = it1, style = MaterialTheme.typography.headlineSmall) }
                     Spacer(modifier = Modifier.height(26.dp))
-                    Text(text = planetInfo.textplanet)
+                    planetInfo.textplanet?.let { it1 -> Text(text = it1) }
                     Spacer(modifier = Modifier.height(26.dp))
 
+
+                    if (!planetInfo.formation.isNullOrEmpty()){
                     Text(
                         text = stringResource(id = R.string.formation),
                         color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.headlineLarge
 
-                    )
+                    )}
 
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text(text = planetInfo.formation)
+                    planetInfo.formation?.let { it1 -> Text(text = it1) }
                     Spacer(modifier = Modifier.height(26.dp))
 
+                    if(!planetInfo.distance.isNullOrEmpty()){
                     Text(
                         text = stringResource(id = R.string.distance),
                         color = MaterialTheme.colorScheme.primary,
 
                         style = MaterialTheme.typography.headlineLarge
-                    )
+                    )}
 
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text(text = planetInfo.distance)
+                    planetInfo.distance?.let { it1 -> Text(text = it1) }
                     Spacer(modifier = Modifier.height(26.dp))
 
+                    if(!planetInfo.orbit.isNullOrEmpty()){
                     Text(
                         text = stringResource(id = R.string.orbit),
 
                         style = MaterialTheme.typography.headlineLarge,
                         color = MaterialTheme.colorScheme.primary
-                    )
+                    )}
 
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text(text = planetInfo.orbit)
+                    planetInfo.orbit?.let { it1 -> Text(text = it1) }
                     Spacer(modifier = Modifier.height(26.dp))
                 }
             }

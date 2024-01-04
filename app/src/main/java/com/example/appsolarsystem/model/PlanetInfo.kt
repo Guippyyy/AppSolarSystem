@@ -18,9 +18,9 @@ import kotlinx.serialization.Serializable
 data class PlanetInfo(
     @SerialName("id") val id: Int,
     @SerialName("PlanetID") val PlanetID: Int,
-    @SerialName("intro") val intro: String,
-    @SerialName("textplanet") val textplanet: String,
-    @SerialName("formation") val formation: String,
-    @SerialName("distance") val distance: String,
-    @SerialName("orbit") val orbit: String
+    @SerialName("intro") val intro: String?,
+    @SerialName("textplanet") val textplanet: String?,
+    @SerialName("formation") val formation: String?,
+    @SerialName("distance") val distance: String?,
+    @SerialName("orbit") val orbit: String?
 )

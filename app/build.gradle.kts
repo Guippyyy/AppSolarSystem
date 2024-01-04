@@ -58,6 +58,7 @@ android {
 
 dependencies {
    implementation("androidx.fragment:fragment-ktx:1.6.2")
+    testImplementation("junit:junit:4.12")
     val nav_version = "2.7.6"
 
     // Java language implementation
@@ -89,6 +90,9 @@ dependencies {
 
 
 
+
+    testImplementation("io.mockk:mockk:1.13.3")
+
     // The compose calendar library
     implementation("com.kizitonwose.calendar:compose:2.4.0")
 
@@ -103,6 +107,9 @@ dependencies {
     implementation("androidx.compose.foundation:foundation:1.5.4")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("app.cash.turbine:turbine:1.0.0")
 
     //API
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

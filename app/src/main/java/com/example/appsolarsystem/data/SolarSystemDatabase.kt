@@ -22,7 +22,7 @@ import com.example.appsolarsystem.data.quickFacts.QuickFactDatabase
  * @property planetInfoDAO Data Access Object for interacting with the [PlanetInfo] table.
  * @property quickFactDAO Data Access Object for interacting with the [QuickFact] table.
  */
-@Database(entities = [PlanetDatabase::class, MoonDatabase::class, PlanetInfoDatabase::class, QuickFactDatabase::class], version = 6, exportSchema = false)
+@Database(entities = [PlanetDatabase::class, MoonDatabase::class, PlanetInfoDatabase::class, QuickFactDatabase::class], version = 7 , exportSchema = false)
 abstract class SolarSystemDatabase : RoomDatabase() {
 
     abstract fun planetDAO(): PlanetDAO

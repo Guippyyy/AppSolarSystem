@@ -22,11 +22,11 @@ data class PlanetInfoDatabase(
     @PrimaryKey
     val id: Int,
     val planetID: Int,
-    val intro: String,
-    val textplanet: String,
-    val formation: String,
-    val distance: String,
-    val orbit: String,
+    val intro: String?,
+    val textplanet: String?,
+    val formation: String?,
+    val distance: String?,
+    val orbit: String?,
 )
 
 /**

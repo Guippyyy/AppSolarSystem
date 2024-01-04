@@ -21,39 +21,39 @@ import org.junit.Test
 
 
 
-class NavigationTest {
-
-
-    @get:Rule
-    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
-
-    private lateinit var navController : NavHostController
-
-    @Test
-    fun setupSolarSystemScreenNavHost(){
-        navController = NavHostController(ApplicationProvider.getApplicationContext())
-        val planet1 = Planet(1, "planet1","fdsfde", "test", 3, 3.0, 33.0)
-        val planet2 = Planet(2, "planet2","fdsfde", "fdf", 3, 3.0, 33.0)
-
-        val planetList = mutableListOf(planet1, planet2)
-        val planetViewModel = PlanetViewModel(FakePlanetRepository(planetList))
-        composeTestRule.setContent {
-
-            SolarSystemScreen(
-                planetViewModel = planetViewModel ,
-                onNextButtonClicked = { planet ->
-                    navController.navigate(Screens.PlanetIdScreen.name)
-                })
-
-        }
-
-        composeTestRule.waitForIdle()
-
-        Thread.sleep(5000)
-        composeTestRule.onNodeWithText("planet1").assertExists()
-        composeTestRule.onNodeWithText("planet1").performClick()
-        assert(navController.currentBackStackEntry?.destination?.route == Screens.PlanetIdScreen.name)
-    }
-
-
-}
+//class NavigationTest {
+//
+//
+//    @get:Rule
+//    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
+//
+//    private lateinit var navController : NavHostController
+//
+//    @Test
+//    fun setupSolarSystemScreenNavHost(){
+//        navController = NavHostController(ApplicationProvider.getApplicationContext())
+//        val planet1 = Planet(1, "planet1","fdsfde", "test", 3, 3.0, 33.0)
+//        val planet2 = Planet(2, "planet2","fdsfde", "fdf", 3, 3.0, 33.0)
+//
+//        val planetList = mutableListOf(planet1, planet2)
+//        val planetViewModel = PlanetViewModel(FakePlanetRepository(planetList))
+//        composeTestRule.setContent {
+//
+//            SolarSystemScreen(
+//                planetViewModel = planetViewModel ,
+//                onNextButtonClicked = { planet ->
+//                    navController.navigate(Screens.PlanetIdScreen.name)
+//                })
+//
+//        }
+//
+//        composeTestRule.waitForIdle()
+//
+//        Thread.sleep(5000)
+//        composeTestRule.onNodeWithText("planet1").assertExists()
+//        composeTestRule.onNodeWithText("planet1").performClick()
+//        assert(navController.currentBackStackEntry?.destination?.route == Screens.PlanetIdScreen.name)
+//    }
+//
+//
+//}

@@ -13,5 +13,9 @@ enum class Screens {
      * Represents the screen displaying detailed information about a specific planet.
      * This screen requires a planet ID as a parameter.
      */
-    PlanetIdScreen // Gets a planet ID as a parameter
+    PlanetIdScreen, // Gets a planet ID as a parameter,
+
+    AsteroidsScreen,
+
+    AsteroidBeltScreen
 }

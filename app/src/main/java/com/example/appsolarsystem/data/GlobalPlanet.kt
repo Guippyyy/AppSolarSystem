@@ -1,6 +1,9 @@
 package com.example.appsolarsystem.data
 
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.appsolarsystem.model.Planet
+import com.example.appsolarsystem.ui.views.MoonViewModel
+
 /**
  * Singleton object to hold the currently selected [Planet].
  *

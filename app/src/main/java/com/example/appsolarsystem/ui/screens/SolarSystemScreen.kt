@@ -15,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -25,6 +26,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.example.appsolarsystem.R
 import com.example.appsolarsystem.component.PlanetCard
 import com.example.appsolarsystem.model.Planet
+import com.example.appsolarsystem.ui.views.MoonViewModel
 import com.example.appsolarsystem.ui.views.PlanetViewModel
 
 
@@ -46,6 +48,7 @@ fun SolarSystemScreen(
 
     LazyColumn(
         modifier = Modifier
+            .testTag("scrolldown")
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
@@ -57,7 +60,6 @@ fun SolarSystemScreen(
         items(planets) { planet ->
             PlanetCard(planet) {
                 onNextButtonClicked(planet)
-                planetViewModel.selectPlanet(planet)
             }
             Spacer(modifier = Modifier.height(100.dp))
         }

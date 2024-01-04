@@ -1,5 +1,6 @@
 package com.example.appsolarsystem.data.moons
 
+import android.util.Log
 import com.example.appsolarsystem.model.Moon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -27,7 +28,8 @@ class FakeMoonRepository(private val moonList: MutableList<Moon>) : MoonReposito
      * @param id The ID of the planet.
      * @return A flow emitting the list of moons for the specified planet ID.
      */
-    override fun getAllMoonsByPlanetStream(id: Int): Flow<List<Moon?>> = flow {
+    override fun getAllMoonsByPlanetStream(id: Int): Flow<List<Moon?>> = flow{
+        Log.d("moonRepo", "${moonList}")
         emit(moonList)
     }
 
