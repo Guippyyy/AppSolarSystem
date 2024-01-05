@@ -13,7 +13,6 @@ import com.example.appsolarsystem.network.MoonApiService
 import com.example.appsolarsystem.network.PlanetApiService
 import com.example.appsolarsystem.network.PlanetInfoApiService
 import com.example.appsolarsystem.network.QuickFactApiService
-import com.example.appsolarsystem.ui.views.QuickFactViewModel
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -49,7 +48,7 @@ interface AppContainer {
  * @property context The application context.
  */
 class DefaultAppContainer(private val context: Context) : AppContainer {
-    private val baseUrl = "http://192.168.100.101:3000/"
+    private val baseUrl = "http://10.0.2.2:3000/"
 
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
