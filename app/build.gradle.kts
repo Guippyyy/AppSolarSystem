@@ -14,6 +14,7 @@ android {
     defaultConfig {
         applicationId = "com.example.appsolarsystem"
         minSdk = 27
+    //noinspection OldTargetApi
     targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -58,7 +59,7 @@ android {
 
 dependencies {
    implementation("androidx.fragment:fragment-ktx:1.6.2")
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13.2")
     val nav_version = "2.7.6"
 
     // Java language implementation

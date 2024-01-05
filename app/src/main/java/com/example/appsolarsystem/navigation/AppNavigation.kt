@@ -80,11 +80,6 @@ fun AppNavigation() {
                                 }
                             )
                             NavigationDrawerItem(
-                                label = { Text(text = stringResource(R.string.drawerComets)) },
-                                selected = false,
-                                onClick = { /*TODO*/ }
-                            )
-                            NavigationDrawerItem(
                                 label = { Text(text = stringResource(R.string.drawerTheAsteroidBelt)) },
                                 selected = false,
                                 onClick = {

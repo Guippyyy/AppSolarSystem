@@ -26,7 +26,6 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.example.appsolarsystem.R
 import com.example.appsolarsystem.component.PlanetCard
 import com.example.appsolarsystem.model.Planet
-import com.example.appsolarsystem.ui.views.MoonViewModel
 import com.example.appsolarsystem.ui.views.PlanetViewModel
 
 
@@ -59,6 +58,7 @@ fun SolarSystemScreen(
 
         items(planets) { planet ->
             PlanetCard(planet) {
+               planetViewModel.selectPlanet(planet)
                 onNextButtonClicked(planet)
             }
             Spacer(modifier = Modifier.height(100.dp))
@@ -133,7 +133,7 @@ fun WelcomeMessage() {
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun VoyagerOneAnimation() {
-    var offset by remember { mutableStateOf(0f) }
+
     val animatable = remember { Animatable(0f) }
 
     LaunchedEffect(Unit) {

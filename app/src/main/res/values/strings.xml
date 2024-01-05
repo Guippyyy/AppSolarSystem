@@ -2,11 +2,7 @@
     <string name="app_name">AppSolarSystem</string>
     <string name="drawerTitle">Explore the Solar System</string>
     <string name="drawerAsteroids">Asteroids</string>
-    <string name="drawerComets">Comets</string>
-    <string name="drawerConstellations">Constellations</string>
-    <string name="drawerTheAsteroidBelt">The Asteroid Belt</string>
-    <string name="drawerGalaxies">Galaxies</string>
-    <string name="drawerStars">Stars</string>
+    <string name="drawerTheAsteroidBelt">Asteroid Belt</string>
     <string name="formation">Formation</string>
     <string name="distance">Distance, Size and Mass</string>
     <string name="orbit">Orbit and Rotation</string>
@@ -18,6 +14,5 @@
     <string name="AsteroidBeltWhatTitle">What Exactly Is The Asteroid Belt? </string>
     <string name="AsteroidBeltWhatContent"> There are hundreds of thousands of asteroids in the asteroid belt, but almost half of the entire mass is made up of just four objects. These objects are the dwarf planet Ceres, and three other asteroids called Vesta, Pallas and Hygiea. The diameters of Vesta, Pallas and Hygiea are over 400km and Ceres is even bigger at 950km diameter. Of the many thousands of asteroids in the asteroid belt, Ceres is the only one large enough to be classified as a “dwarf planet”. Apart from these four objects, the remaining objects in the asteroid belt range in size from small rocks right down to dust particles.</string>
     <string name="AsteroidBeltHowTitle"> How Far Away Is The Asteroid Belt?</string>
-    <string name="AsteroidBeltHowContent"> The asteroid belt is between the planets Mars and Jupiter. It is located about 2.2 to 3.2 Astronomical Units (AU) from the Sun. That is somewhere between 329-478 million km away. The asteroid belt is huge and the space between each of the asteroids is over 600,000 miles. The circumference of Earth is only 24,901.45 miles, which means that the distance between objects in the asteroid belt is more than 24 times the circumference of Earth.</string>
-
+    <string name="AsteroidBeltHowContent"> The asteroid belt is between the planets Mars and Jupiter. It is located about 2.2 to 3.2 Astronomical Units (AU) from the Sun. That is somewhere between 329–478 million km away. The asteroid belt is huge and the space between each of the asteroids is over 600,000 miles. The circumference of Earth is only 24,901.45 miles, which means that the distance between objects in the asteroid belt is more than 24 times the circumference of Earth.</string>
 </resources>

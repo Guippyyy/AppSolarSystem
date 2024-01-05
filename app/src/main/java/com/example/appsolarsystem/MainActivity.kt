@@ -3,18 +3,12 @@ package com.example.appsolarsystem
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import com.example.appsolarsystem.navigation.AppNavigation
-import com.example.appsolarsystem.ui.SolarSystemApp
-import com.example.appsolarsystem.ui.screens.SolarSystemScreen
 import com.example.appsolarsystem.ui.theme.AppSolarSystemTheme
 
 
